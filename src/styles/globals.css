@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  
+}
+
+/* .paginate {
+
+  display: flex;
+
+  .active {
+      background-color: var(--primaryBlue700) !important;
+      color: white !important;
+      overflow: hidden;
+  }
+
+  .break {
+      color: var(--dark400);
+  }
+
+  .disabled {
+      color: var(--greyEstori)
+  }
+
+  .pageLink {
+      width: 2rem;
+      height: 2rem;
+      background: #FFFFFF;
+      overflow: hidden;
+      border-radius: 4px;
+      color: var(--dark400);
+  }
+
+  .pageItem:hover {
+      background: var(--primaryBlue700);
+      color: white;
+  }
+
+  .disabled {
+      color: var(--greyEstori);
+
+      .pageItem:hover {
+          cursor: not-allowed;
+          background: none !important;
+          color: var(--greyEstori);
+      }
+  }
+
+  .pageItem {
+      width: 2rem;
+      height: 2rem;
+      user-select: none;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      border: 1px solid var(--greyEstori);
+      align-items: center;
+      border-radius: 4px;
+      justify-content: center;
+  }
+} */
