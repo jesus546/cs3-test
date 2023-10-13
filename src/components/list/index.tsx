@@ -7,6 +7,7 @@ import {  InTodos } from '@/store/todo/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDeleteTaskState, setEditTaskState, setModalState, useModalState, useTodoState } from '@/store/todo/todoSlice';
 import Pagination from '../pagination';
+import { toast } from 'react-toastify';
 
 type Todo = {
   id: number;
@@ -41,7 +42,7 @@ const List = () => {
       cell: (info) =>
         <div className='flex items-center space-x-2'>
           <FiEdit onClick={() =>editHandler(info.row.original)} className='cursor-pointer' />
-          <AiFillDelete onClick={() => dispatch(setDeleteTaskState(info.row.original))} className='cursor-pointer' />
+          <AiFillDelete onClick={() => deleteList(info.row.original)} className='cursor-pointer' />
         </div>,
       header: "Acciones",
     })
@@ -60,6 +61,19 @@ const List = () => {
   const next = () => {
     setStartValue((startValue) => startValue + postXpage)
     setEndValue((endValue) => endValue + postXpage)
+  }
+  const deleteList = (payload:InTodos) => {
+    dispatch(setDeleteTaskState(payload))
+    toast.success('Tarea eliminada!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+  });
   }
 
   return (

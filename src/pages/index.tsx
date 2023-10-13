@@ -6,16 +6,21 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import List from '@/components/list';
 import Card from '@/components/card';
-import { setModalState, setTodoState, useModalState } from '@/store/todo/todoSlice';
+import { setFilterState, setModalState, setTodoState, useDisableInput, useModalState } from '@/store/todo/todoSlice';
 import ModalTask from '@/components/modalTask';
+import InputSearch from '@/components/inputSearch';
+import { AiFillAppstore, AiOutlineUnorderedList } from 'react-icons/ai';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const todoOptions = [
   {
-    title: "Card",
+    icon: <AiFillAppstore />,
     value: "card"
   },
   {
-    title: "Lista",
+    icon: <AiOutlineUnorderedList />,
     value: "list"
   }
 ]
@@ -23,6 +28,7 @@ const todoOptions = [
 export default function Home() {
   const dark = useSelector(useDarkState)
   const modalTask = useSelector(useModalState)
+  const disableInput = useSelector(useDisableInput)
   const [selectItem, setSelectItem] = useState<string>(todoOptions[0].value)
   const { data, isLoading } = todoApi.useAllTodoQuery()
   const dispatch = useDispatch()
@@ -30,9 +36,9 @@ export default function Home() {
   useEffect(() => {
     if (data) {
       dispatch(setTodoState(data.todos))
+      dispatch(setFilterState(data.todos))
     }
   }, [data, dispatch])
-
 
   const interfacePages = (key: string) => {
     switch (key) {
@@ -41,7 +47,7 @@ export default function Home() {
       case "card":
         return <Card isLoading={isLoading} />
       default:
-        return <Card  isLoading={isLoading} />
+        return <Card isLoading={isLoading} />
     }
   }
 
@@ -50,23 +56,26 @@ export default function Home() {
       className={`flex min-h-screen flex-col  ${dark && 'dark'}`}
     >
       <Nav />
-      <div className='space-y-3  pt-20 p-8'>
-        <div className='flex justify-between '>
-          <div className='flex space-x-2 items-center'>
-            <span className="self-center text-lg md:block  sm:hidden font-semibold whitespace-nowrap ">Tareas</span>
+      <div className='space-y-3  pt-24 p-8'>
+        <div className='flex sm:flex-col sm:space-y-2 justify-between '>
+          <div className='flex md:space-x-2 sm:flex-col sm:space-y-2 sm:items-start items-center'>
+            <span className="self-center dark:text-gray-900 text-lg md:block  sm:hidden font-semibold  ">Tareas</span>
+            <InputSearch />
             <div className='flex space-x-2 border py-1.5 px-2 rounded items-center'>
-
-              {todoOptions.map((e: { title: string, value: string }, i: number) => (
-                <div onClick={() => setSelectItem(e.value)} className={clsx('rounded cursor-pointer hover:text-white hover:bg-gray-800   text-sm text-dark font-semibold  px-1.5', selectItem === e.value && 'text-white bg-gray-800')} key={i}>{e.title}</div>
+              {todoOptions.map((e: { icon: React.JSX.Element, value: string }, i: number) => (
+                <div onClick={() => setSelectItem(e.value)} className={clsx('rounded cursor-pointer hover:text-white hover:bg-gray-800   text-sm text-dark font-semibold  px-2 py-2', selectItem === e.value && 'text-white bg-gray-800')} key={i}>{e.icon}</div>
               ))}
-
             </div>
           </div>
-          <button onClick={() => dispatch(setModalState(!modalTask))} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3.5 py-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Crear tarea</button>
+          {selectItem === "list" &&
+            <button disabled={disableInput} onClick={() => dispatch(setModalState(!modalTask))} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3.5 py-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Crear tarea</button>
+          }
+
         </div>
         {interfacePages(selectItem)}
       </div>
       <ModalTask />
+      <ToastContainer/>
     </main>
   )
 }
