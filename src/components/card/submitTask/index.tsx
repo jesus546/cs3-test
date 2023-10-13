@@ -14,6 +14,8 @@ const SubmitTask = () => {
     const disableInput = useSelector(useDisableInput)
     const dispatch = useDispatch()
     const [postTask] = todoApi.useAddTodoMutation()
+
+    //permite crear un tarea
     const onSubmit = async (e: any, { resetForm }: any) => {
         const payload = {
             ...e,

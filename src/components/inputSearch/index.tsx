@@ -24,6 +24,7 @@ const InputSearch = () => {
     const [dropdown, setDropdown] = React.useState<boolean>(false)
     const [dropdownFilter, setDropdownFilter] = React.useState<string>("all")
 
+    //permite crear una tarea
     const onSubmit = (el: any) => {
         const result = el.target.value
    
@@ -38,6 +39,8 @@ const InputSearch = () => {
             dispatch(setDisableInputState(false))
         }
     }
+
+    //filtramos los elementos de una array dependiendo de la condición y se setea al gestor de estados[redux]
     const onFilter = (key: string) => {
         setDropdownFilter(key)
         switch (key) {

@@ -13,6 +13,7 @@ const ModalTask = () => {
   const dispatch = useDispatch()
   const [postTask] = todoApi.useAddTodoMutation()
 
+  //esta funcion permite crear y editar una tarea
   const onSubmit = async (e: any, { resetForm }: any) => {
     if (editTask.id) {
       const payload = {
@@ -47,6 +48,8 @@ const ModalTask = () => {
     }
 
   }
+
+  //cerrar modal
   const closeModal = () => {
     dispatch(setEditTaskState(taskInitial))
     dispatch(setModalState(!modalTask))

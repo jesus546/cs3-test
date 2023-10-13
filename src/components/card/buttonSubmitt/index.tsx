@@ -3,7 +3,6 @@ import { BsCheckLg } from 'react-icons/bs'
 
 const ButtonSubmmit:React.FC<{ isLoading:boolean }> = ({isLoading = false}) => {
   return (
-   
         <button  type="submit" disabled={isLoading} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             {isLoading ?
                 <div role="status">
@@ -13,7 +12,6 @@ const ButtonSubmmit:React.FC<{ isLoading:boolean }> = ({isLoading = false}) => {
                 : <BsCheckLg />
             }
         </button>
-
   )
 }
 

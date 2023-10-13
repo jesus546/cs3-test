@@ -33,6 +33,7 @@ export default function Home() {
   const { data, isLoading } = todoApi.useAllTodoQuery()
   const dispatch = useDispatch()
 
+  //se ejecuta el use effect para setear los datos al gestor de datos
   useEffect(() => {
     if (data) {
       dispatch(setTodoState(data.todos))
@@ -40,6 +41,7 @@ export default function Home() {
     }
   }, [data, dispatch])
 
+  //elige las dos opciones de lista
   const interfacePages = (key: string) => {
     switch (key) {
       case "list":

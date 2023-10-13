@@ -21,6 +21,7 @@ const Card: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
     const [invalid, setInvalid] = useState<boolean>(false)
     const dispatch = useDispatch()
 
+    //edita una tarea
     const editTaskHandler = async (payload: InTodos) => {
         if (payload.todo.length) {
             setAvalibleForm(0)
@@ -28,10 +29,12 @@ const Card: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
             dispatch(setUpdateTaskState(payload))
             setInvalid(false)
         } else {
-            return setInvalid(true)     
+            return setInvalid(true)
         }
 
     }
+
+    //se declara una funcion para eliminar un elemento en un array 
     const deleteList = (payload: InTodos) => {
         dispatch(setDeleteTaskState(payload))
         toast.error('Tarea eliminada!', {
@@ -46,16 +49,20 @@ const Card: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
         });
     }
 
+    //se setean los valores inicial y final para pasar a la siquiente pagina
     const prev = () => {
         setStartValue((startValue) => startValue - postXpage)
         setEndValue((endValue) => endValue - postXpage)
     }
 
+    //se setean los valores inicial y final para pasar a la anterior pagina
     const next = () => {
         setStartValue((startValue) => startValue + postXpage)
         setEndValue((endValue) => endValue + postXpage)
     }
-    const onChangeText = (e:any) => {
+
+    //permite cambiar un valor al hook state esto permitira que se puede reflejar dicho valor en el elemento input
+    const onChangeText = (e: any) => {
         const result = e.target.value
         setTextTodo(result)
         setInvalid(false)
@@ -79,9 +86,9 @@ const Card: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
                                                     <span onClick={() => editTaskHandler({ ...e, completed: !e.completed })} className={clsx('cursor-pointer border  rounded-full text-white', e.completed ? 'bg-green-700 p-1  border-white' : 'p-3 border-gray-300 group-hover:text-slate-200 ')}> {e.completed && <AiOutlineCheck />}  </span>
                                                     {avalibleForm === e.id ?
                                                         <div className='flex flex-col space-y-1 w-full'>
-                                                            <input type='text' value={textTodo} onChange={onChangeText} onBlur={() => editTaskHandler({ ...e, todo: textTodo })} 
-                                                               className={clsx('!w-full outline-none text-sm group-hover:bg-slate-200 border border-gray-600 rounded-lg px-1  py-2 dark:group-hover:bg-gray-400  dark:bg-gray-800', invalid && "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500")} />
-                                                            {invalid && <p className="mt-2 text-sm text-red-600 dark:text-red-500">El campo es requerido.</p> }
+                                                            <input type='text' value={textTodo} onChange={onChangeText} onBlur={() => editTaskHandler({ ...e, todo: textTodo })}
+                                                                className={clsx('!w-full outline-none text-sm group-hover:bg-slate-200 border border-gray-600 rounded-lg px-1  py-2 dark:group-hover:bg-gray-400  dark:bg-gray-800', invalid && "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500")} />
+                                                            {invalid && <p className="mt-2 text-sm text-red-600 dark:text-red-500">El campo es requerido.</p>}
                                                         </div>
 
                                                         :

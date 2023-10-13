@@ -18,6 +18,7 @@ export function DataTable<Data extends object>({
   data,
   columns
 }: DataTableProps<Data>) {
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     columns,
