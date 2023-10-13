@@ -17,20 +17,24 @@ cd cs3-test
 
 2. Install dependencies:
 
+```bash
 npm install 
-# or
+#or
 yarn 
+```
 
 
 ## Usage
 Here are some basic steps on how to use this project:
 
 1. Run the application:
+```bash
 npm run dev
-# or
+or
 yarn dev
-# or
+or
 pnpm dev
+```
 
 2. Open your web browser and go to [http://localhost:3000](http://localhost:3000).
 
