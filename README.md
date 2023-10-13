@@ -1,6 +1,8 @@
 # CS3 tasks
 
-Welcome to CS3 tasks! This is a simple example README to help you get started.
+Welcome to CS3 tasks! This project is based or made in next.js using the Tailwind CSS framework for the design of the web page and for the development of the application, the requirement of the test was taken into account to develop with the TypeScrypt programming language, this gives us a wide control over the code, and its typing providing us with the design pattern also gives us an understanding of the code,
+
+Another aspect that is considered is the use of the state manager [Redux Toolkit]
 
 ## Table of Contents
 - [Installation](#installation)
@@ -12,8 +14,10 @@ Welcome to CS3 tasks! This is a simple example README to help you get started.
 To get started, follow these installation instructions:
 
 1. Clone the repository:
+```bash
 git clone https://github.com/jesus546/cs3-test.git
 cd cs3-test
+```
 
 2. Install dependencies:
 
@@ -36,7 +40,7 @@ or
 pnpm dev
 ```
 
-2. Open your web browser and go to [http://localhost:3000](http://localhost:3000).
+2. Open your web browser and go to [https://cs3-test-todo.netlify.app/](https://cs3-test-todo.netlify.app/).
 
 
 ## Requirements
